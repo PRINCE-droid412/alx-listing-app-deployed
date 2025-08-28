@@ -1,25 +1,26 @@
-import React from "react";
-import { PropertyProps } from "@/interfaces";
+interface Property {
+  id: number;
+  name: string;
+  image: string;
+  price: number;
+  location: string;
+  rating: number;
+}
 
-const PropertyCard: React.FC<{ property: PropertyProps }> = ({ property }) => {
+export default function PropertyCard({ property }: { property: Property }) {
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition w-full max-w-sm">
+    <div className="bg-white shadow-md rounded-lg overflow-hidden">
       <img
         src={property.image}
         alt={property.name}
         className="w-full h-48 object-cover"
       />
       <div className="p-4">
-        <h3 className="text-lg font-semibold text-gray-800">
-          {property.name}
-        </h3>
-        <div className="flex justify-between items-center mt-2 text-sm text-gray-600">
-          <span>${property.price.toLocaleString()}</span>
-          <span>⭐ {property.rating}</span>
-        </div>
+        <h2 className="text-lg font-semibold">{property.name}</h2>
+        <p className="text-gray-500">{property.location}</p>
+        <p className="mt-2 font-bold">${property.price} / night</p>
+        <p className="text-yellow-500">⭐ {property.rating}</p>
       </div>
     </div>
   );
-};
-
-export default PropertyCard;
+}
