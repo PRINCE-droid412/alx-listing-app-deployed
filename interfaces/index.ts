@@ -1,6 +1,7 @@
 // TypeScript Interfaces for ALX Listing App
 import { ReactNode } from 'react';
 // Interface for Card Component Props
+
 export interface CardProps {
   imageSrc: string;
   title: string;
@@ -33,11 +34,36 @@ export interface OffersProps {
 
 export interface PropertyProps {
   name: string;
-  address: AddressProps;
+  address: {
+    state: string;
+    city: string;
+    country: string;
+    offers?: {
+      bed: string;
+      shower: string;
+      occupants: string;
+    };
+  };
   rating: number;
   category: string[];
   price: number;
-  offers: OffersProps;
+  offers: {
+    bed: string;
+    shower: string;
+    occupants: string;
+  };
   image: string;
-  discount: string;
+  discount?: string;
+}
+
+// Define and export the Property interface
+export interface Property {
+ id: number;
+  name: string;
+  image: string;
+  price: number;
+  location: string;
+  description: string;
+  rating: number;
+  // Add other fields as needed
 }

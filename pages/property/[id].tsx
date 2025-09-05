@@ -2,11 +2,12 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import PropertyDetail from "@/components/property/PropertyDetail";
+import { CardProps, Property } from "@/interfaces";
 
 export default function PropertyDetailPage() {
   const router = useRouter();
   const { id } = router.query;
-  const [property, setProperty] = useState<any | null>(null);
+  const [property, setProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -14,8 +15,8 @@ export default function PropertyDetailPage() {
     const fetchProperty = async () => {
       if (!id) return; // Wait until `id` is available from router
       try {
-        const response = await axios.get(`http://localhost:5000/properties/${id}`);
-        // 👆 Replace with your real API base URL
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/properties/${id}`);
+        // 👆 Fetch the property by its ID
         setProperty(response.data);
       } catch (err) {
         console.error("Error fetching property details:", err);

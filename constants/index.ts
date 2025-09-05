@@ -3,7 +3,7 @@ import { PropertyProps }  from "@/interfaces";
 export const HERO_BACKGROUND_IMAGE = "assets/hero.png";
 
 
-export const API_BASE_URL = 'https://api.example.com';
+export const API_BASE_URL = "`${process.env.NEXT_PUBLIC_API_BASE_URL}/properties";
 export const APP_NAME = 'ALX Listing App';
 export const DEFAULT_LANGUAGE = 'en';
 
@@ -22,7 +22,12 @@ export const PROPERTYLISTINGSAMPLE: PropertyProps []  =  [
     address: {
       state: "Seminyak",
       city: "Bali",
-      country: "Indonesia"
+      country: "Indonesia",
+      offers: {
+        bed: "3",
+        shower: "3",
+        occupants: "4-6"
+      }
     },
     rating: 4.89,
     category: ["Luxury Villa", "Pool", "Free Parking"],
