@@ -2,9 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import PropertyCard from "@/components/common/PropertyCard";
 import { PropertyProps } from "@/interfaces";
+import { Property } from "@/types/interfaces";
 
 export default function Home() {
-  const [properties, setProperties] = useState<PropertyProps[]>([]);
+  const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -33,7 +34,7 @@ export default function Home() {
       <h1 className="text-2xl font-bold mb-6">Available Properties</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {properties.map((property) => (
-          <PropertyCard key={property.name} property={property as any} />
+          <PropertyCard key={property.id} property={property} />
         ))}
       </div>
     </div>

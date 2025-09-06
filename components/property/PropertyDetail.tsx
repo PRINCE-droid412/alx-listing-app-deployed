@@ -1,14 +1,10 @@
-interface Property {
-  id: number;
-  name: string;
-  image: string;
-  price: number;
-  location: string;
-  description: string;
-  rating: number;
+import { Property } from "@/types/interfaces";
+
+interface PropertyDetailProps {
+  property: Property;
 }
 
-export default function PropertyDetail({ property }: { property: Property }) {
+export default function PropertyDetail({ property }: PropertyDetailProps) {
   return (
     <div className="container mx-auto p-6">
       <div className="bg-white shadow-md rounded-lg overflow-hidden">

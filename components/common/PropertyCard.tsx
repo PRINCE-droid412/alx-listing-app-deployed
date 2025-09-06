@@ -1,13 +1,10 @@
-interface Property {
-  id: number;
-  name: string;
-  image: string;
-  price: number;
-  location: string;
-  rating: number;
+import { Property } from "@/types/interfaces";
+
+interface PropertyCardProps {
+  property: Property;
 }
 
-export default function PropertyCard({ property }: { property: Property }) {
+export default function PropertyCard({ property }: PropertyCardProps) {
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden">
       <img
