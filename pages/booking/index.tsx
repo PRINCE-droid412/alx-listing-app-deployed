@@ -2,6 +2,17 @@
 import axios from "axios";
 import { useState } from "react";
 
+type BookingFormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  cardNumber: string;
+  expirationDate: string;
+  cvv: string;
+  billingAddress: string;
+};
+
 export default function BookingForm() {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -75,29 +86,23 @@ export default function BookingForm() {
       <h2 className="text-2xl font-semibold mb-4">Confirm Your Booking</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {Object.keys(formData).map((key) => (
+        {(Object.keys(formData) as Array<keyof BookingFormData>).map((key) => (
           <input
             key={key}
             type="text"
             name={key}
             placeholder={key.replace(/([A-Z])/g, " $1")}
-            value={(formData as any)[key]}
+            value={formData[key]}
             onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg"
           />
         ))}
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
-        >
-          {loading ? "Processing..." : "Confirm & Pay"}
-        </button>
+        {/* ...existing code... */}
       </form>
 
-      {error && <p className="mt-3 text-red-500">{error}</p>}
-      {success && <p className="mt-3 text-green-600">{success}</p>}
+      {/* ...existing code... */}
     </div>
   );
 }
+// ...existing code...

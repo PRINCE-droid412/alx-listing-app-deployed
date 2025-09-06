@@ -12,7 +12,21 @@ export default function Home() {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/properties`); 
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/properties/list`,
+          {
+            params: {
+              location: "Bali",
+              Checkin: "2025-09-10",
+              checkout: "2025-09-15",
+              adults: 2
+            },
+            headers: {
+              "x-RapidAPI-key": process.env.NEXT_PUBLIC_RAPIDAPI_KEY,
+              "X-RapidAPI-Host": "airbnb19.p.rapidapi.com"
+            }
+          }
+        );
         // Replace with your actual API base URL
         setProperties(response.data);
       } catch (err) {
