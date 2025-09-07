@@ -1,10 +1,18 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ReviewSection = ({ propertyId }: { propertyId: string }) => {
-  const [reviews, setReviews] = useState<any[]>([]);
+
+type Review = {
+    id: number,
+    comment: string
+}
+type ReviewSectionProps = {
+  propertyId: number;
+};
+
+const ReviewSection = ({ propertyId }: ReviewSectionProps) => {
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -13,27 +21,22 @@ const ReviewSection = ({ propertyId }: { propertyId: string }) => {
         setReviews(response.data);
       } catch (error) {
         console.error("Error fetching reviews:", error);
-        setError("Failed to load reviews. Please try again.");
       } finally {
         setLoading(false);
       }
     };
 
-    if (propertyId) {
-      fetchReviews();
-    }
+    fetchReviews();
   }, [propertyId]);
 
-  if (loading) return <p>Loading reviews...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
-  if (reviews.length === 0) return <p>No reviews yet. Be the first to review!</p>;
+  if (loading) {
+    return <p>Loading reviews...</p>;
+  }
 
   return (
-    <div className="space-y-4">
+    <div>
       {reviews.map((review) => (
-        <div key={review.id} className="border-b pb-2">
-          <p className="font-semibold">{review.reviewerName}</p>
-          <p className="text-yellow-500">⭐ {review.rating}</p>
+        <div key={review.id}>
           <p>{review.comment}</p>
         </div>
       ))}
